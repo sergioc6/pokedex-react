@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './PokemonsSection.css'
 import { getPokemons } from "../../services/pokemonService";
-import { v4 as uuidv4 } from 'uuid';
 import PokemonDetail from "../../components/PokemonDetail";
+import { pokemonDetailTransform } from "../../utils/transforms/pokemonTransform";
 
 const PokemonsList = () => {
 
@@ -12,8 +12,12 @@ const PokemonsList = () => {
     
     useEffect(() => {
         async function fetchData() {
-            const result = await getPokemons(page)
-            setPokemons(result.data.results)
+            const results = await getPokemons(page)
+            const resultsTransformed = []
+            results.data.results.forEach(result => {
+                resultsTransformed.push(pokemonDetailTransform(result))
+            })
+            setPokemons(resultsTransformed)
         }
         fetchData()
     }, [])
@@ -22,8 +26,8 @@ const PokemonsList = () => {
     return (
         <div className="grid-pokemons">
             {   pokemons ?
-                pokemons.map(pokemon =>
-                    <PokemonDetail key={uuidv4()}></PokemonDetail>)                    
+                pokemons.map(({id, name, url, sprite }) =>
+                    <PokemonDetail key={id} id={id} name={name} url={url}/>)                    
                 : 'Cargando...'
             }
         </div>
