@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getPokemons } from "./../services/pokemonService";
+import './PokemonsSection.css'
+import { getPokemons } from "../../services/pokemonService";
 import { v4 as uuidv4 } from 'uuid';
+import PokemonDetail from "../../components/PokemonDetail";
 
 const PokemonsList = () => {
 
@@ -18,13 +20,13 @@ const PokemonsList = () => {
 
 
     return (
-        <>
+        <div className="grid-pokemons">
             {   pokemons ?
                 pokemons.map(pokemon =>
-                    <li key={uuidv4()}>{pokemon.name}</li>)
+                    <PokemonDetail key={uuidv4()}></PokemonDetail>)                    
                 : 'Cargando...'
             }
-        </>
+        </div>
     )
 }
 

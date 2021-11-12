@@ -5,8 +5,8 @@ import { POKEMONS, UBICACIONES } from "./utils/routes"
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import PokemonsList from "./sections/PokemonsList";
-import LocationsSection from "./sections/LocationsSection";
+import PokemonsSection from "./sections/PokemonsSection"
+import LocationsSection from "./sections/LocationsSection/";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Header/>
         <NavBar/>
         <Routes>
-          <Route path={POKEMONS} element={<PokemonsList/>}/>
+          <Route path={POKEMONS} element={<PokemonsSection/>}/>
           <Route path={UBICACIONES} element={<LocationsSection/>}/>
         </Routes>
         <Footer/>

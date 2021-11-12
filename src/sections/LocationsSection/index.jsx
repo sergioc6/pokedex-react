@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getLocations } from "../services/locationService";
+import './LocationsSection.css';
+import { getLocations } from "../../services/locationService";
 import { v4 as uuidv4 } from 'uuid';
+import LocationDetail from "../../components/LocationDetail";
 
 const LocationsSection = () => {
     
@@ -15,14 +17,12 @@ const LocationsSection = () => {
     }, [])
 
     return (
-        <>
-        {
-        locations.map(location => 
-            <div key={uuidv4()}>
-                {location.name}
-            </div>
-        )}
-        </>
+        <div className="grid-locations">
+            {
+            locations.map(location => 
+                <LocationDetail key={uuidv4()} />
+            )}
+        </div>
     )
 }
 
